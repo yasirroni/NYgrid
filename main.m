@@ -5,8 +5,8 @@
 %   Created by Vivienne Liu
 %   Last modified on Feb. 8, 2022
 
-clear; clc; close all;
-tic;
+% clear; clc; close all;
+% tic;
 
 %% Input parameters
 
@@ -31,7 +31,7 @@ addrenew = false;
 % Read mat files, otherwise read csv files
 usemat = true;
 % Add project to MATLAB path
-addpath(genpath("."))
+% addpath(genpath("."))
 
 %% Data preparation
 
@@ -50,15 +50,15 @@ addpath(genpath("."))
 %   3. NRC: (1) Daily nuclear capacity factor
 %   4. EIA: (1) Monthly hydro generation data for Niagara and St. Lawrence
 
-writeFuelmix(testyear);
-writeInterflow(testyear);
-writePrice(testyear);
-writeLoad(testyear);
-writeFuelPrice(testyear);
-writeThermalGen(testyear);
-writeGenParam(testyear);
-writeHydroGen(testyear);
-writeNuclearGen(testyear);
+% writeFuelmix(testyear);
+% writeInterflow(testyear);
+% writePrice(testyear);
+% writeLoad(testyear);
+% writeFuelPrice(testyear);
+% writeThermalGen(testyear);
+% writeGenParam(testyear);
+% writeHydroGen(testyear);
+% writeNuclearGen(testyear);
 
 %% Modify MPC
 
@@ -79,7 +79,8 @@ for y = testyear
     for m = testmonth
         for d = testday
             for h = testhour
-                timeStamp = datetime(y,m,d,h,0,0,"Format","MM/dd/uuuu HH:mm:ss");
+                % timeStamp = datetime(y,m,d,h,0,0,"Format","MM/dd/uuuu HH:mm:ss");
+                timeStamp = datetime(y,m,d,h,0,0,"Format","MM/dd/uuuu HH:00:00");
                 fprintf("Start running %s ...\n",datestr(timeStamp));
                 % Update operation conditions
                 mpcreduced = updateOpCond(mpc,timeStamp,savedata,verbose,usemat);

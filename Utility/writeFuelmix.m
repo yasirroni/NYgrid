@@ -9,16 +9,16 @@ if isempty(testyear)
     testyear = 2019; % Default data in year 2019
 end
 
-outfilename = fullfile('Data','fuelmixHourly_'+string(testyear)+'.csv');
-matfilename = fullfile('Data','fuelmixHourly_'+string(testyear)+'.mat');
+outfilename = fullfile('Data',['fuelmixHourly_',int2str(testyear),'.csv']);
+matfilename = fullfile('Data',['fuelmixHourly_',int2str(testyear),'.mat']);
 
 if ~isfile(outfilename) || ~isfile(matfilename) % File doesn't exist
     %% Download fuel mix data
     downloadData(testyear,'fuelmix');    
 
     %% Read fuel mix data
-    fuelmixFileDir = fullfile('Prep',string(testyear),'fuelmix');
-    fuelmixFileName = string(testyear)+"*";
+    fuelmixFileDir = fullfile('Prep',int2str(testyear),'fuelmix');
+    fuelmixFileName = int2str(testyear)+"*";
     fuelmixDataStore = fileDatastore(fullfile(fuelmixFileDir,fuelmixFileName),...
         "ReadFcn",@importFuelmix,"UniformRead",true,"FileExtensions",'.csv');
     fuelmixAll = readall(fuelmixDataStore);

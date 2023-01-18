@@ -9,16 +9,16 @@ if isempty(testyear)
     testyear = 2019; % Default data in year 2019
 end
 
-outfilename = fullfile('Data','interflowHourly_'+string(testyear)+'.csv');
-matfilename = fullfile('Data','interflowHourly_'+string(testyear)+'.mat');
+outfilename = fullfile('Data',['interflowHourly_',int2str(testyear),'.csv']);
+matfilename = fullfile('Data',['interflowHourly_',int2str(testyear),'.mat']);
 
 if ~isfile(outfilename) || ~isfile(matfilename)% File doesn't exist
     %% Download interface flow data
     downloadData(testyear,'interflow');    
     
     %% Read interface flow data
-    interflowFileDir = fullfile('Prep',string(testyear),'interflow');
-    interflowFileName = string(testyear)+"*";
+    interflowFileDir = fullfile('Prep',int2str(testyear),'interflow');
+    interflowFileName = int2str(testyear)+"*";
     interflowDataStore = fileDatastore(fullfile(interflowFileDir,interflowFileName),...
         "ReadFcn",@importInterflow,"UniformRead",true,"FileExtensions",'.csv');
     interflowAll = readall(interflowDataStore);
